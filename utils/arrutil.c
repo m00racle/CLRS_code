@@ -48,3 +48,20 @@ void intArrSet(int *A, int l, int s)
     */
     for (int i = 0; i < l; i++) A[i] = s;
 }
+
+
+char *intArrStr(int *A, int l)
+{
+    /*
+        return string version of the array to use inside printf
+        
+        Parameters:
+            - A : array of ints
+            - l : length of element to convert to string
+        
+        Return: char[]
+    */
+    static char *r;
+
+    return r;
+}
