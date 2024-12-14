@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 void intArrCopy(int *src, int *dest, int l)
@@ -47,4 +48,48 @@ void intArrSet(int *A, int l, int s)
             - s : (int) value to be set to each element
     */
     for (int i = 0; i < l; i++) A[i] = s;
+}
+
+
+char *intArrStr(int *A, int l)
+{
+    /*
+        return string version of the array to use inside printf
+        
+        Parameters:
+            - A : array of ints
+            - l : length of element to convert to string
+        
+        Return: char[]
+    */
+    
+    // I want to put the static in heap not in stack to ensure it survive multi scope functions
+    static char z[10000];
+
+    // reset the string to empty:
+    // if NOT since we use concatenation by strcat the new int array will be put after the old one if exist!!
+    strcpy(z, "");
+
+    // put opening {:
+    strcat(z, "{");
+    
+    // iterate all element in A and change them to char then concatenate to r:
+    for (int i = 0; i < l; i++)
+    {
+        // prepare place to store the added elemeent
+        char sint[5];
+        // change the int into char
+        sprintf(sint, "%d", A[i]);
+        // concat to z:
+        strcat(z, sint);
+        // add commas and space except the last element:
+        if (i < l - 1)
+        {
+            strcat(z, ", ");
+        }
+    }
+    // add closure }
+    strcat(z, "}");
+
+    return z;
 }
