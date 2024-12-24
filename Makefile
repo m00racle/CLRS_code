@@ -10,4 +10,4 @@ temp/testfrm.o : utils/testfrm.c
 	${CC} -c utils/testfrm.c -o temp/testfrm.o
 
 clean:
-	-rm temp/*.o *.out *.exe
+	-rm temp/*.o run*
