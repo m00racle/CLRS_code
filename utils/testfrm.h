@@ -7,6 +7,6 @@
     This mostly handling assertions
 */
 
-void intAssertEquals(int value, int target, char* test_id);
+bool intAssertEquals(int value, int target, char* test_id, bool verbose);
 
 #endif

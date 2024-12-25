@@ -1,19 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*
     unit test framewok 
 */
 
-void intAssertEquals(int value, int target, char* test_id)
+bool intAssertEquals(int value, int target, char* test_id, bool verbose)
 {
-    printf("\nTEST ID: %s\n", test_id);
+    if (verbose) printf("\nTEST ID: %s\n", test_id);
     if (value == target) 
     {
-        printf("test pass: the value %d is the same as target %d\n", value, target);
+        if (verbose) printf("test pass: the value %d is the same as target %d\n", value, target);
+        return true;
     } else
     {
-        printf("test failed: \n" );
-        printf("  cause: value %d is not the same as the target %d\n", value, target);
+        if (verbose)
+        {
+
+            printf("test failed: \n" );
+            printf("  cause: value %d is not the same as the target %d\n", value, target);
+        }
+        return false;
     }
 }
