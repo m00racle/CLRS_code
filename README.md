@@ -9,4 +9,6 @@ code for complementary studying Introduction to Algorithm book
         - void intArrSet(int *A, int l, int s);
         - char *intArrStr(int *A, int l);
     - testfrm
+        - bool boolAssertFalse(int value, char* test_id, bool verbose);
+        - bool boolAssertTrue(int value, char* test_id, bool verbose);     
         - bool intAssertEquals(int value, int target, char* test_id, bool verbose);
