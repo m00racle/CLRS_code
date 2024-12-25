@@ -6,6 +6,18 @@
     unit test framewok 
 */
 
+bool boolAssertTrue(int value, char* test_id, bool verbose)
+{
+    if (verbose) printf("\nTEST ID: %s\n", test_id);
+    return value == true;
+}
+
+bool boolAssertFalse(int value, char* test_id, bool verbose)
+{
+    if (verbose) printf("\nTEST ID: %s\n", test_id);
+    return value == false;
+}
+
 bool intAssertEquals(int value, int target, char* test_id, bool verbose)
 {
     if (verbose) printf("\nTEST ID: %s\n", test_id);
