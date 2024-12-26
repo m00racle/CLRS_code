@@ -53,11 +53,11 @@ Mkfile.old
 dkms.conf
 
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -67,4 +67,3 @@ dkms.conf
 
 # VSCode workspace
 *.code-workspace
-
