@@ -47,7 +47,7 @@ bool intArrayAssertEquals(int* input, int* target, int length, char* test_id, bo
         if (input[i] != target[i])
         {
             flag = false;
-            if (verbose) printf("  - fail: input index %d is %d when it shoud be %d in target\n", i, input[i], target[i]);
+            if (verbose) printf(" - fail: index %d at input is %d; it shoud be %d as in target\n", i, input[i], target[i]);
         }
     }
 
@@ -56,11 +56,19 @@ bool intArrayAssertEquals(int* input, int* target, int length, char* test_id, bo
         if (flag)
         {
             printf("-> Test Passed\n");
-            printf("input:\n%s\nequals to\n%s\ntarget", intArrStr(input, length), intArrStr(target, length));
+            // printf("input:\n%s\nequals to\n%s\ntarget", intArrStr(input, length), intArrStr(target, length));
+            // commented out because lead to error as having them in one call to printf will make both print the same
+            // string array of char since the intArrStr returns a pointer to the string!
+            printf("  input:\n  %s\n", intArrStr(input, length));
+            printf("  is equals to target:\n  %s\n", intArrStr(target, length));
         } else
         {
             printf("-> Test Failed!\n");
-            printf("input:\n%s\ndiffrent to\n%s\ntarget", intArrStr(input, length), intArrStr(target, length));
+            // printf("input:\n%s\ndiffrent to\n%s\ntarget", intArrStr(input, length), intArrStr(target, length));
+            // commented out because lead to error as having them in one call to printf will make both print the same
+            // string array of char since the intArrStr returns a pointer to the string!
+            printf("  input:\n  %s\n", intArrStr(input, length));
+            printf("  is differs to target:\n  %s\n", intArrStr(target, length));
         }
     }
 

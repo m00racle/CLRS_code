@@ -13,9 +13,14 @@ void test_addition()
 
 void test_array()
 {
-    int A[5] = {1,2,3,4,5};
+    int A[5] = {1,2,91,4,5};
     int B[5] = {1,2,3,4,60};
-    intArrayAssertEquals(A, B, 5, "ARRAY TRUE", true);
+    // you must declare and define the array before using it as argument to assert
+
+    intArrayAssertEquals(A, B, 5, "ARRAY FALSE", true);
+    
+    // now we test result true because we just want to evaluate two elements between A and B:
+    intArrayAssertEquals(A, B, 2, "ARRAY TRUE", true);
 }
 
 int main()
