@@ -53,6 +53,7 @@ void test_chapter4()
     printf("\nTest cases for chapter 4: Divide and Conquer\n");
     // test original data: I will directly using the transformed data of closing price daily changes data
     int ori[] = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
+    int ori_length = sizeof(ori) / sizeof(ori[0]);
     int oriExp[] = {7, 10, 43};
     // test case all positive price change
     int all_increase[] = {7,6,5,4,3,2,1};
@@ -60,6 +61,23 @@ void test_chapter4()
     // test case all negative price changes
     int all_down[] = {-1,-2,-3,-4,-5,-1,-2};
     int all_downExp[] = {0,0,0};
+
+    // CAUTION: actions and asserts must be done by data segment since the max data uses pointer to same array
+    // thus changing case will also change the data used for other assertions!
+    // ori data
+    printf("\nthe Ori Data: %s\n", intArrStr(ori, ori_length));
+    int* ori_trans = TransMaxSubArray(ori, 0, ori_length - 1);
+    intArrayAssertEquals(ori_trans, oriExp, 3, "Trans Max Sub Array on Ori Data", true);
+    
+    // all increase case data
+    printf("\nthe all increase data: %s\n", intArrStr(all_increase, 7));
+    int* increase_trans = TransMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_trans, all_increaseExp, 3, "Trans Max Sub Array all increase data", true);
+
+    // all negative data
+    printf("\nthe all negative data: %s", intArrStr(all_down, 7));
+    int* down_trans = TransMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_trans, all_downExp, 3, "Trans Max Sub Array all negative data", true);
 }
 
 int main()
