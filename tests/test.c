@@ -4,6 +4,8 @@
 #include "../utils/testfrm.h"
 #include "../utils/arrutil.h"
 #include "../chapter2/chap2.h"
+#include "../chapter4/chap4.h"
+
 
 void test_addition()
 {
@@ -27,8 +29,11 @@ void test_array()
 void test_chapter2()
 {
     // Arrange:
+    // rev1 is the array to be sorted using insertion sort:
     int rev1[9] = {4,3,2,1,0,-1,-2,-3,-4};
+    // rev2 is the array to be sorted using merge sort:
     int rev2[9] = {4,3,2,1,0,-1,-2,-3,-4};
+    // norm is the control array which will be used as target to check sorting of rev1 and rev2
     int norm[9] = {-4,-3,-2,-1,0,1,2,3,4};
 
     // act
@@ -43,10 +48,25 @@ void test_chapter2()
     intArrayAssertEquals(rev2, norm, 9, "CHAPTER 2 MERGE SORT", true);
 }
 
+void test_chapter4()
+{
+    printf("\nTest cases for chapter 4: Divide and Conquer\n");
+    // test original data: I will directly using the transformed data of closing price daily changes data
+    int ori[] = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
+    int oriExp[] = {7, 10, 43};
+    // test case all positive price change
+    int all_increase[] = {7,6,5,4,3,2,1};
+    int all_increaseExp[] = {0, 6, 28};
+    // test case all negative price changes
+    int all_down[] = {-1,-2,-3,-4,-5,-1,-2};
+    int all_downExp[] = {0,0,0};
+}
+
 int main()
 {
     test_addition();
     test_array();
     test_chapter2();
+    test_chapter4();
     return 0;
 }
