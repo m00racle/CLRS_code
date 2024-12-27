@@ -16,3 +16,6 @@ code for complementary studying Introduction to Algorithm book
     - chapter 2 -> Getting Started
         - void InsertionSort(int *A, int length);
         - void MergeSort(int *A, int p, int r);
+    - chapter 4 -> Divide and Conquer
+        - int* TransMaxSubArray(int* A, int length) : finding max sub array of A (start, end, value) using transformed brute force
+        - int* DivMaxSubArray(int* A, int start, int end) : find max sub array of A using Divide and Conquer approach
