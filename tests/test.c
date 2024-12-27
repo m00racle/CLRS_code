@@ -6,14 +6,6 @@
 #include "../chapter2/chap2.h"
 #include "../chapter4/chap4.h"
 
-
-void test_addition()
-{
-    printf("returned: %d", intAssertEquals(2+3, 5, "TEST TRUE ADDITION", false));
-    bool fAdd = intAssertEquals(2+3, 6, "TEST false ADDITION", true);
-    if (fAdd == false) printf("false\n");
-}
-
 void test_array()
 {
     int A[5] = {1,2,91,4,5};
@@ -21,6 +13,7 @@ void test_array()
     // you must declare and define the array before using it as argument to assert
 
     intArrayAssertEquals(A, B, 5, "ARRAY FALSE", true);
+    printf("NOTE: ARRAY FALSE test is DELIBERATELY TO BE FAIL!! NOTHING TO CHANGE HERE!");
     
     // now we test result true because we just want to evaluate two elements between A and B:
     intArrayAssertEquals(A, B, 2, "ARRAY TRUE", true);
@@ -59,7 +52,7 @@ void test_chapter4()
     int all_increase[] = {7,6,5,4,3,2,1};
     int all_increaseExp[] = {0, 6, 28};
     // test case all negative price changes
-    int all_down[] = {-1,-2,-3,-4,-5,-1,-2};
+    int all_down[] = {-10,-2,-3,-4,-5,-1,-2};
     int all_downExp[] = {0,0,0};
 
     // CAUTION: actions and asserts must be done by data segment since the max data uses pointer to same array
@@ -68,21 +61,29 @@ void test_chapter4()
     printf("\nthe Ori Data: %s\n", intArrStr(ori, ori_length));
     int* ori_trans = TransMaxSubArray(ori, 0, ori_length - 1);
     intArrayAssertEquals(ori_trans, oriExp, 3, "Trans Max Sub Array on Ori Data", true);
+    // using divide can conquer
+    int* ori_div = DivMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(ori_div, oriExp, 3, "Div Max Sub Array on Ori Data", true);
     
     // all increase case data
     printf("\nthe all increase data: %s\n", intArrStr(all_increase, 7));
     int* increase_trans = TransMaxSubArray(all_increase, 0, 6);
     intArrayAssertEquals(increase_trans, all_increaseExp, 3, "Trans Max Sub Array all increase data", true);
+    // using divide and conquer
+    int* increase_div = DivMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_div, all_increaseExp, 3, "Div Max Sub Array all increase data", true);
 
     // all negative data
     printf("\nthe all negative data: %s", intArrStr(all_down, 7));
     int* down_trans = TransMaxSubArray(all_down, 0, 6);
     intArrayAssertEquals(down_trans, all_downExp, 3, "Trans Max Sub Array all negative data", true);
+    // using divide and conquer
+    int* down_div = DivMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_div, all_downExp, 3, "Div Max Sub Array all negative data", true);
 }
 
 int main()
 {
-    test_addition();
     test_array();
     test_chapter2();
     test_chapter4();
