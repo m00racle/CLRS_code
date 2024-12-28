@@ -178,6 +178,8 @@ int* DivMaxSubArray(int*A, int low, int high)
             intArrCopy(cross_data, div_data, 3);
         }
     }
+    // guard if there is negative sum:
+    if (div_data[2] < 0) intArrSet(div_data, 3, 0);
 
     return div_data;
 }
