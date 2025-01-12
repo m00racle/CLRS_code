@@ -183,7 +183,7 @@ int* DivMaxSubArray(int*A, int low, int high)
     // that it will return the least negative value
 
     // uncomment code below to activate guard if there is negative sum:
-    if (div_data[2] < 0) intArrSet(div_data, 3, 0);
+    // if (div_data[2] < 0) intArrSet(div_data, 3, 0);
 
     return div_data;
 }
@@ -203,15 +203,14 @@ int* BruteMaxSubArray(int* A, int low, int high)
     // declarations
     int start, end;
     int sums;
+
     // declaration and definition
     int max_sum = A[low];
     static int brute_data[3];
-    // set all value of the brute data to all 0
-    // intArrSet(brute_data, 3, 0);
 
     // for loop level 1
     // for i = low .. high - 1
-    for (int i = low; i < high; i++)
+    for (int i = low; i <= high; i++)
     {
         // reset sums = 0
         sums = 0;
@@ -235,6 +234,10 @@ int* BruteMaxSubArray(int* A, int low, int high)
     brute_data[0] = start;
     brute_data[1] = end;
     brute_data[2] = max_sum;
+
+    // by default when all price changes are negative it will return negative value but the least negative
+    // uncomment code below to activate guard if there is negative sum:
+    // if (brute_data[2] < 0) intArrSet(brute_data, 3, 0);
 
     return brute_data;
 }

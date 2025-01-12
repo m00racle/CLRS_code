@@ -54,6 +54,7 @@ void test_chapter4()
     // test case all negative price changes
     int all_down[] = {-10,-2,-3,-4,-5,-1,-2};
     int all_downExp[] = {0,0,0};
+    int all_downAlt[] = {5,5,-1};
 
     // CAUTION: actions and asserts must be done by data segment since the max data uses pointer to same array
     // thus changing case will also change the data used for other assertions!
@@ -85,7 +86,10 @@ void test_chapter4()
     intArrayAssertEquals(down_trans, all_downExp, 3, "Trans Max Sub Array all negative data", true);
     // using divide and conquer
     int* down_div = DivMaxSubArray(all_down, 0, 6);
-    intArrayAssertEquals(down_div, all_downExp, 3, "Div Max Sub Array all negative data", true);
+    intArrayAssertEquals(down_div, all_downAlt, 3, "Div Max Sub Array all negative data", true);
+    // using brute force
+    int* down_brute = BruteMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_brute, all_downAlt, 3, "Brute Max Sub Array allnegative data", true);
 }
 
 int main()
