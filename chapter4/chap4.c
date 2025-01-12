@@ -178,7 +178,11 @@ int* DivMaxSubArray(int*A, int low, int high)
             intArrCopy(cross_data, div_data, 3);
         }
     }
-    // guard if there is negative sum:
+    // by default when all price changes are negative it will return negative value but the least negative
+    // NOTE this is not the most ideal in real life but in later Exercise it will be asked and you should answer 
+    // that it will return the least negative value
+
+    // uncomment code below to activate guard if there is negative sum:
     if (div_data[2] < 0) intArrSet(div_data, 3, 0);
 
     return div_data;
