@@ -64,6 +64,9 @@ void test_chapter4()
     // using divide can conquer
     int* ori_div = DivMaxSubArray(ori, 0, ori_length -1);
     intArrayAssertEquals(ori_div, oriExp, 3, "Div Max Sub Array on Ori Data", true);
+    // using brute force
+    int* ori_brute= BruteMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(ori_brute, oriExp, 3, "Brute Max Sub Array on Ori Data", true);
     
     // all increase case data
     printf("\nthe all increase data: %s\n", intArrStr(all_increase, 7));
@@ -72,6 +75,9 @@ void test_chapter4()
     // using divide and conquer
     int* increase_div = DivMaxSubArray(all_increase, 0, 6);
     intArrayAssertEquals(increase_div, all_increaseExp, 3, "Div Max Sub Array all increase data", true);
+    // using brute force
+    int* increase_brute = BruteMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_brute, all_increaseExp, 3, "Brute Max Sub Array all increase data", true);
 
     // all negative data
     printf("\nthe all negative data: %s", intArrStr(all_down, 7));

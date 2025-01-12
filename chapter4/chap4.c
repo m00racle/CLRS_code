@@ -187,3 +187,54 @@ int* DivMaxSubArray(int*A, int low, int high)
 
     return div_data;
 }
+
+int* BruteMaxSubArray(int* A, int low, int high)
+{
+    /*
+        Find Maximum Sub Array using brute force (pure not transformed)
+
+        Return : static Array of ints {start, end, value}
+
+        Paramaters: 
+            - A : array of ints consist of price changes
+            - low : int the lowest index of the array to find the max sub array
+            - high : int highest index of the array to find the max sub array
+    */
+    // declarations
+    int start, end;
+    int sums;
+    // declaration and definition
+    int max_sum = A[low];
+    static int brute_data[3];
+    // set all value of the brute data to all 0
+    // intArrSet(brute_data, 3, 0);
+
+    // for loop level 1
+    // for i = low .. high - 1
+    for (int i = low; i < high; i++)
+    {
+        // reset sums = 0
+        sums = 0;
+        for (int j = i; j <= high; j++)
+        {
+            // add the sum to the next
+            sums += A[j];
+            // test if sums > max_sum
+            if (sums > max_sum)
+            {
+                // set max_sum as sums
+                max_sum = sums;
+                // set the start = i
+                start = i;
+                // set end = j
+                end = j;
+            }
+        }
+    }
+    // set the result back to brute_data
+    brute_data[0] = start;
+    brute_data[1] = end;
+    brute_data[2] = max_sum;
+
+    return brute_data;
+}
