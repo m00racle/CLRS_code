@@ -65,9 +65,15 @@ void test_chapter4()
     // using divide can conquer
     int* ori_div = DivMaxSubArray(ori, 0, ori_length -1);
     intArrayAssertEquals(ori_div, oriExp, 3, "Div Max Sub Array on Ori Data", true);
+    // using safe divide and conquer
+    int* safe_ori_div = SafeDivMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(safe_ori_div, oriExp, 3, "Safe Div Max Sub Array on Ori Data", true);
     // using brute force
     int* ori_brute= BruteMaxSubArray(ori, 0, ori_length -1);
     intArrayAssertEquals(ori_brute, oriExp, 3, "Brute Max Sub Array on Ori Data", true);
+    // using safe brute force
+    int* safe_ori_brute= SafeBruteMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(safe_ori_brute, oriExp, 3, "Safe Brute Max Sub Array on Ori Data", true);
     
     // all increase case data
     printf("\nthe all increase data: %s\n", intArrStr(all_increase, 7));
@@ -76,9 +82,15 @@ void test_chapter4()
     // using divide and conquer
     int* increase_div = DivMaxSubArray(all_increase, 0, 6);
     intArrayAssertEquals(increase_div, all_increaseExp, 3, "Div Max Sub Array all increase data", true);
+    // using safe divide and conquer
+    int* safe_increase_div = SafeDivMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(safe_increase_div, all_increaseExp, 3, "Safe Div Max Sub Array all increase data", true);
     // using brute force
     int* increase_brute = BruteMaxSubArray(all_increase, 0, 6);
     intArrayAssertEquals(increase_brute, all_increaseExp, 3, "Brute Max Sub Array all increase data", true);
+    // using safe brute force
+    int* safe_increase_brute = SafeBruteMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(safe_increase_brute, all_increaseExp, 3, "Safe Brute Max Sub Array all increase data", true);
 
     // all negative data
     printf("\nthe all negative data: %s", intArrStr(all_down, 7));
@@ -87,9 +99,15 @@ void test_chapter4()
     // using divide and conquer
     int* down_div = DivMaxSubArray(all_down, 0, 6);
     intArrayAssertEquals(down_div, all_downAlt, 3, "Div Max Sub Array all negative data", true);
+    // using safe divide and conquer
+    int* safe_down_div = SafeDivMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(safe_down_div, all_downExp, 3, "Safe Div Max Sub Array all negative data", true);
     // using brute force
     int* down_brute = BruteMaxSubArray(all_down, 0, 6);
     intArrayAssertEquals(down_brute, all_downAlt, 3, "Brute Max Sub Array allnegative data", true);
+    // using safe brute force
+    int* safe_down_brute = SafeBruteMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(safe_down_brute, all_downExp, 3, "Safe Brute Max Sub Array allnegative data", true);
 }
 
 int main()

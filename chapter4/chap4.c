@@ -178,12 +178,29 @@ int* DivMaxSubArray(int*A, int low, int high)
             intArrCopy(cross_data, div_data, 3);
         }
     }
-    // by default when all price changes are negative it will return negative value but the least negative
-    // NOTE this is not the most ideal in real life but in later Exercise it will be asked and you should answer 
-    // that it will return the least negative value
 
-    // uncomment code below to activate guard if there is negative sum:
-    // if (div_data[2] < 0) intArrSet(div_data, 3, 0);
+    return div_data;
+}
+
+int* SafeDivMaxSubArray(int*A, int low, int high)
+{
+    /*
+        Find Max Sub Array but with anti negative value safe features
+    by default when all price changes are negative it will return negative value but the least negative
+    NOTE this is not the most ideal in real life but in later Exercise it will be asked and you should answer 
+    that it will return the least negative value
+        Return Array {start, end, value}
+
+        Parameters:
+        A : array of ints consist of price changes data
+        low: int lowest index of A array to be processed
+        high: int highest index of A array to be processed
+    */
+    // get the result from div_data
+    int* div_data = DivMaxSubArray(A, low, high);
+
+    // guard if there is negative sum:
+    if (div_data[2] < 0) intArrSet(div_data, 3, 0);
 
     return div_data;
 }
@@ -235,9 +252,31 @@ int* BruteMaxSubArray(int* A, int low, int high)
     brute_data[1] = end;
     brute_data[2] = max_sum;
 
+    return brute_data;
+}
+
+int* SafeBruteMaxSubArray(int* A, int low, int high)
+{
+    /*
+        Find Maximum Sub Array using brute force (pure not transformed)
+        But with safeguard that does not allow return value negative
+        To meet the more idealized real life scenario when all price changes are negative
+        then it is best not invest on it all meaning all results should be 0
+
+        Return : static Array of ints {start, end, value}
+
+        Paramaters: 
+            - A : array of ints consist of price changes
+            - low : int the lowest index of the array to find the max sub array
+            - high : int highest index of the array to find the max sub array
+
+    */
+    // get the brute force data
+    int* brute_data = BruteMaxSubArray(A, low, high);
+
     // by default when all price changes are negative it will return negative value but the least negative
-    // uncomment code below to activate guard if there is negative sum:
-    // if (brute_data[2] < 0) intArrSet(brute_data, 3, 0);
+    // activate guard if there is negative sum:
+    if (brute_data[2] < 0) intArrSet(brute_data, 3, 0);
 
     return brute_data;
 }
