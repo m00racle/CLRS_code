@@ -4,13 +4,7 @@
 #include "../utils/testfrm.h"
 #include "../utils/arrutil.h"
 #include "../chapter2/chap2.h"
-
-void test_addition()
-{
-    printf("returned: %d", intAssertEquals(2+3, 5, "TEST TRUE ADDITION", false));
-    bool fAdd = intAssertEquals(2+3, 6, "TEST false ADDITION", true);
-    if (fAdd == false) printf("false\n");
-}
+#include "../chapter4/chap4.h"
 
 void test_array()
 {
@@ -19,6 +13,7 @@ void test_array()
     // you must declare and define the array before using it as argument to assert
 
     intArrayAssertEquals(A, B, 5, "ARRAY FALSE", true);
+    printf("NOTE: ARRAY FALSE test is DELIBERATELY TO BE FAIL!! NOTHING TO CHANGE HERE!");
     
     // now we test result true because we just want to evaluate two elements between A and B:
     intArrayAssertEquals(A, B, 2, "ARRAY TRUE", true);
@@ -27,8 +22,11 @@ void test_array()
 void test_chapter2()
 {
     // Arrange:
+    // rev1 is the array to be sorted using insertion sort:
     int rev1[9] = {4,3,2,1,0,-1,-2,-3,-4};
+    // rev2 is the array to be sorted using merge sort:
     int rev2[9] = {4,3,2,1,0,-1,-2,-3,-4};
+    // norm is the control array which will be used as target to check sorting of rev1 and rev2
     int norm[9] = {-4,-3,-2,-1,0,1,2,3,4};
 
     // act
@@ -43,10 +41,79 @@ void test_chapter2()
     intArrayAssertEquals(rev2, norm, 9, "CHAPTER 2 MERGE SORT", true);
 }
 
+void test_chapter4()
+{
+    printf("\nTest cases for chapter 4: Divide and Conquer\n");
+    // test original data: I will directly using the transformed data of closing price daily changes data
+    int ori[] = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
+    int ori_length = sizeof(ori) / sizeof(ori[0]);
+    int oriExp[] = {7, 10, 43};
+    // test case all positive price change
+    int all_increase[] = {7,6,5,4,3,2,1};
+    int all_increaseExp[] = {0, 6, 28};
+    // test case all negative price changes
+    int all_down[] = {-10,-2,-3,-4,-5,-1,-2};
+    int all_downExp[] = {0,0,0};
+    int all_downAlt[] = {5,5,-1};
+
+    // CAUTION: actions and asserts must be done by data segment since the max data uses pointer to same array
+    // thus changing case will also change the data used for other assertions!
+    // ori data
+    printf("\nthe Ori Data: %s\n", intArrStr(ori, ori_length));
+    int* ori_trans = TransMaxSubArray(ori, 0, ori_length - 1);
+    intArrayAssertEquals(ori_trans, oriExp, 3, "Trans Max Sub Array on Ori Data", true);
+    // using divide can conquer
+    int* ori_div = DivMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(ori_div, oriExp, 3, "Div Max Sub Array on Ori Data", true);
+    // using safe divide and conquer
+    int* safe_ori_div = SafeDivMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(safe_ori_div, oriExp, 3, "Safe Div Max Sub Array on Ori Data", true);
+    // using brute force
+    int* ori_brute= BruteMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(ori_brute, oriExp, 3, "Brute Max Sub Array on Ori Data", true);
+    // using safe brute force
+    int* safe_ori_brute= SafeBruteMaxSubArray(ori, 0, ori_length -1);
+    intArrayAssertEquals(safe_ori_brute, oriExp, 3, "Safe Brute Max Sub Array on Ori Data", true);
+    
+    // all increase case data
+    printf("\nthe all increase data: %s\n", intArrStr(all_increase, 7));
+    int* increase_trans = TransMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_trans, all_increaseExp, 3, "Trans Max Sub Array all increase data", true);
+    // using divide and conquer
+    int* increase_div = DivMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_div, all_increaseExp, 3, "Div Max Sub Array all increase data", true);
+    // using safe divide and conquer
+    int* safe_increase_div = SafeDivMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(safe_increase_div, all_increaseExp, 3, "Safe Div Max Sub Array all increase data", true);
+    // using brute force
+    int* increase_brute = BruteMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(increase_brute, all_increaseExp, 3, "Brute Max Sub Array all increase data", true);
+    // using safe brute force
+    int* safe_increase_brute = SafeBruteMaxSubArray(all_increase, 0, 6);
+    intArrayAssertEquals(safe_increase_brute, all_increaseExp, 3, "Safe Brute Max Sub Array all increase data", true);
+
+    // all negative data
+    printf("\nthe all negative data: %s", intArrStr(all_down, 7));
+    int* down_trans = TransMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_trans, all_downExp, 3, "Trans Max Sub Array all negative data", true);
+    // using divide and conquer
+    int* down_div = DivMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_div, all_downAlt, 3, "Div Max Sub Array all negative data", true);
+    // using safe divide and conquer
+    int* safe_down_div = SafeDivMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(safe_down_div, all_downExp, 3, "Safe Div Max Sub Array all negative data", true);
+    // using brute force
+    int* down_brute = BruteMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(down_brute, all_downAlt, 3, "Brute Max Sub Array allnegative data", true);
+    // using safe brute force
+    int* safe_down_brute = SafeBruteMaxSubArray(all_down, 0, 6);
+    intArrayAssertEquals(safe_down_brute, all_downExp, 3, "Safe Brute Max Sub Array allnegative data", true);
+}
+
 int main()
 {
-    test_addition();
     test_array();
     test_chapter2();
+    test_chapter4();
     return 0;
 }
