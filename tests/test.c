@@ -110,10 +110,22 @@ void test_chapter4()
     intArrayAssertEquals(safe_down_brute, all_downExp, 3, "Safe Brute Max Sub Array allnegative data", true);
 }
 
+void test_chap42()
+{
+    int mat1[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int mat2[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    bool tes1 = intMatrixAssertEquals(2, 3, mat1, mat2, "simple test", false);
+    printf("test1 result: %s\n", tes1 ? "true" : "false");
+    mat1[0][2] = 9;
+    bool tes2 = intMatrixAssertEquals(2, 3, mat1, mat2, "negative test", true);
+    printf("test2 result: %s\n", tes2 ? "true" : "false");
+}
+
 int main()
 {
     test_array();
     test_chapter2();
     test_chapter4();
+    test_chap42();
     return 0;
 }

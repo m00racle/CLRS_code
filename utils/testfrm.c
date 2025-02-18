@@ -105,5 +105,5 @@ bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char
             }
         }
     }
-    return false;
+    return flag;
 }
