@@ -74,3 +74,36 @@ bool intArrayAssertEquals(int* input, int* target, int length, char* test_id, bo
 
     return flag;
 }
+
+bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char* test_id, bool verbose)
+{
+    /*
+        Test if Matrix in the form of Array of int Arrays is equal to target Matrix with the same type
+        and dimension
+
+        Return: boolean
+
+        Arguments
+
+        int r: number of matrix rows
+        int c: number of matrix columns
+        int* input: array of arrays consist of int data type as input to be tested
+        int* target: array of arrays consist of int data type as input to be tested 
+        char* test_id: string of test identification
+        bool verbose: set whether the detail of the test steps are printed out or not
+    */
+
+    bool flag = true;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            // test one element after another 
+            if (input[i][j] != target[i][j]) // error: C can't use index j directly since input is *int
+            {
+                flag = false;
+            }
+        }
+    }
+    return false;
+}
