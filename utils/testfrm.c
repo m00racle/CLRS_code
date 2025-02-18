@@ -94,6 +94,7 @@ bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char
     */
 
     bool flag = true;
+    if (verbose) printf("\nTEST_ID: %s\n", test_id);
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
@@ -102,7 +103,19 @@ bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char
             if (input[i][j] != target[i][j]) // error: C can't use index j directly since input is *int
             {
                 flag = false;
+                if (verbose) printf("FAIL: row: %d col: %d input: %d should be %d\n", i, j, input[i][j], target[i][j]);
             }
+        }
+    }
+
+    if (verbose) 
+    {
+        if (flag)
+        {
+            printf("TEST PASSED\n");
+        } else
+        {
+            printf("TEST FAILED!!\n");
         }
     }
     return flag;
