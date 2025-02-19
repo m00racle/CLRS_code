@@ -93,3 +93,40 @@ char *intArrStr(int *A, int l)
 
     return z;
 }
+
+char *intMatrixStr(int r, int c, int A[r][c])
+{
+    /* 
+        make string version of matrix in form of Array of Arrays
+
+        Return: char*
+
+        Parameters:
+        - int r : number of matrix rows
+        - int c : number of matrix columns
+        - int A[][] : the matrix in form of array of arrays
+    */
+    
+    //initialize static char
+    static char x[50000];
+    //reset the x
+    strcpy(x, "");
+    //put opening bracket
+    strcat(x, "{");
+
+    for (int j = 0; j < r; j++)
+    {
+        //convert the arrays inside 
+        strcat(x, intArrStr(A[j], c));
+        // add comma between inside arrays
+        if (j < r-1)
+        {
+            strcat(x,", ");
+        }
+        
+    }
+    //add closure in the end
+    strcat(x, "}");
+
+    return x;
+}

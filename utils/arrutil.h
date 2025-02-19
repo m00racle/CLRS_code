@@ -18,4 +18,7 @@ void intArrSet(int *A, int l, int s);
 // return string version of the array to use inside printf
 char *intArrStr(int *A, int l);
 
+// return string version of matrix in form of array of arrays
+char *intMatrixStr(int r, int c, int A[r][c]);
+
 #endif

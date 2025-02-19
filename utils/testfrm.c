@@ -112,10 +112,14 @@ bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char
     {
         if (flag)
         {
-            printf("TEST PASSED\n");
+            printf("TEST PASSED :\n");
+            printf("%s <- input\n", intMatrixStr(r, c, input));
+            printf("%s <- target\n", intMatrixStr(r, c, target));
         } else
         {
             printf("TEST FAILED!!\n");
+            printf("%s <- input\n", intMatrixStr(r, c, input));
+            printf("%s <- target\n", intMatrixStr(r, c, target));
         }
     }
     return flag;
