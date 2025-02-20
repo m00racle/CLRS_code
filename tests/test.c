@@ -122,10 +122,10 @@ void test_chap42()
     printf("test2 result: %s\n", tes2 ? "true" : "false");
 
     // test basic multiplications
-    // int C[2][1]; 
-    // int** result = basicMatrixMultiply(2, 3, 1, mat2, mat3);
-    // int basic_target[2][1] = {{6}, {15}};
-    // bool test3 = intMatrixAssertEquals(2, 1, C, basic_target, "test Basic Matrix Multiplication", true);
+    int C[2][1] = {{0}, {0}}; 
+    basicMatrixMultiply(2, 3, 1, mat2, mat3, C);
+    int basic_target[2][1] = {{6}, {15}};
+    bool test3 = intMatrixAssertEquals(2, 1, C, basic_target, "test Basic Matrix Multiplication", true);
 }
 
 int main()

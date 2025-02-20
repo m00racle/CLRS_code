@@ -8,7 +8,7 @@
     4.2 Strassen’s algorithm for matrix multiplication
 */
 
-int** basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z])
+void basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z], int C[x][z])
 {
     /* 
         Basic Matrix Multiplication -> C = A x B
@@ -21,14 +21,8 @@ int** basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z])
         int z : number of column(s) of second matrix (B) 
         int A[][] : first matrix with x rows and y columns
         int B[][] : second matrix with y rows and z columns
+        int C[][] : all zeros matris with x rows and z columns to put the multiplication results
     */
-    
-    // initialize 2D matrix
-    int** C = (int**)malloc(x * sizeof(int*));
-    for (int h = 0; h < x; h++)
-    {
-        C[h] = (int*)malloc(z * sizeof(int));
-    }
 
     // begin multiplication steps
     for (int i = 0; i < x; i++)
@@ -42,5 +36,4 @@ int** basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z])
         }
     }
 
-    return C;
 }
