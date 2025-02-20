@@ -114,11 +114,18 @@ void test_chap42()
 {
     int mat1[2][3] = {{1, 2, 3}, {4, 5, 6}};
     int mat2[2][3] = {{1, 2, 3}, {4, 5, 6}};
-    bool tes1 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX simple test", true);
+    int mat3[3][1] = {{1}, {1}, {1}};
+    bool tes1 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX ASSERT PASS test", true);
     printf("test1 result: %s\n", tes1 ? "true" : "false");
     mat1[0][2] = 9;
-    bool tes2 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX negative test", true);
+    bool tes2 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX ASSERT FAIL test", true);
     printf("test2 result: %s\n", tes2 ? "true" : "false");
+
+    // test basic multiplications
+    // int C[2][1]; 
+    // int** result = basicMatrixMultiply(2, 3, 1, mat2, mat3);
+    // int basic_target[2][1] = {{6}, {15}};
+    // bool test3 = intMatrixAssertEquals(2, 1, C, basic_target, "test Basic Matrix Multiplication", true);
 }
 
 int main()
