@@ -37,3 +37,20 @@ void basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z], int C[x]
     }
 
 }
+
+void squareMatrixMultiply(int n, int A[n][n], int B[n][n], int C[n][n])
+{
+    /* 
+        matrix multiplicaton but for square matrix
+
+        Return: void
+
+        Parameters: 
+        int n : number of rows or columns for all matrices involved in calculation
+        int A[][]
+        int B[][]
+    */
+    
+    // pass trhrough
+    basicMatrixMultiply(n, n, n, A, B, C);
+}

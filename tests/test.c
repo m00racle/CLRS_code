@@ -126,6 +126,13 @@ void test_chap42()
     basicMatrixMultiply(2, 3, 1, mat2, mat3, C);
     int basic_target[2][1] = {{6}, {15}};
     bool test3 = intMatrixAssertEquals(2, 1, C, basic_target, "test Basic Matrix Multiplication", true);
+
+    // test square matrix multiplication
+    int mat_id2[2][2] = {{1, 0}, {0, 1}};
+    int mat_sq1[2][2] = {{1, 2}, {3, 4}};
+    int mat_sqc1[2][2] = {{0, 0}, {0, 0}};
+    squareMatrixMultiply(2, mat_id2, mat_sq1, mat_sqc1);
+    bool test4 = intMatrixAssertEquals(2, 2, mat_sqc1, mat_sq1, "test square multiplication wiht id matrix", true);
 }
 
 int main()
