@@ -112,27 +112,31 @@ void test_chapter4()
 
 void test_chap42()
 {
-    int mat1[2][3] = {{1, 2, 3}, {4, 5, 6}};
-    int mat2[2][3] = {{1, 2, 3}, {4, 5, 6}};
-    int mat3[3][1] = {{1}, {1}, {1}};
-    bool tes1 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX ASSERT PASS test", true);
-    printf("test1 result: %s\n", tes1 ? "true" : "false");
-    mat1[0][2] = 9;
-    bool tes2 = intMatrixAssertEquals(2, 3, mat1, mat2, "MATRIX ASSERT FAIL test", true);
-    printf("test2 result: %s\n", tes2 ? "true" : "false");
+    /* 
+        testing for matrix and Strassen algoritm related
+    */
+    
+    // start with the old matrix assert equal tests
+    int** init_zeros = initMatrix(2, 3);
+    
+    // comparison 
+    int compare_zero[2][3] = {{0, 0, 0}, {0, 0, 0}};
+    // TEST: init matrix all zeros
+    intMatrixAssertEquals(2, 3, init_zeros, compare_zero, "TEST: init all zero matrix", true);
+    //free the heap matrix
+    freeMatrix(init_zeros, 2);
 
-    // test basic multiplications
-    int C[2][1] = {{0}, {0}}; 
-    basicMatrixMultiply(2, 3, 1, mat2, mat3, C);
-    int basic_target[2][1] = {{6}, {15}};
-    bool test3 = intMatrixAssertEquals(2, 1, C, basic_target, "test Basic Matrix Multiplication", true);
+    // TEST set matrix
+    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int** init_set = setMatrix(2, 3, value_matrix);
 
-    // test square matrix multiplication
-    int mat_id2[2][2] = {{1, 0}, {0, 1}};
-    int mat_sq1[2][2] = {{1, 2}, {3, 4}};
-    int mat_sqc1[2][2] = {{0, 0}, {0, 0}};
-    squareMatrixMultiply(2, mat_id2, mat_sq1, mat_sqc1);
-    bool test4 = intMatrixAssertEquals(2, 2, mat_sqc1, mat_sq1, "test square multiplication wiht id matrix", true);
+    //test: set matrix same as value matrix
+    intMatrixAssertEquals(2, 3, init_set, value_matrix, "TEST: set values matrix", true);
+    // TEST: set matrix but compare to test FALSE assertion
+    int wrong_set[2][3] = {{1,2,5}, {5, 7, 6}};
+    intMatrixAssertEquals(2, 3, init_set, wrong_set, "TEST: expected to FALSE Asertion", true);
+    // free the init set
+    freeMatrix(init_set, 2);
 }
 
 int main()

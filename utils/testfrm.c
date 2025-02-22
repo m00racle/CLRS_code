@@ -75,9 +75,10 @@ bool intArrayAssertEquals(int* input, int* target, int length, char* test_id, bo
     return flag;
 }
 
-bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char* test_id, bool verbose)
+bool intMatrixAssertEquals(int r, int c, int** input, int target[r][c], char* test_id, bool verbose)
 {
     /*
+        DEPRECATED:
         Test if Matrix in the form of Array of int Arrays is equal to target Matrix with the same type
         and dimension
 
@@ -113,12 +114,12 @@ bool intMatrixAssertEquals(int r, int c, int input[r][c], int target[r][c], char
         if (flag)
         {
             printf("TEST PASSED :\n");
-            printf("%s <- input\n", intMatrixStr(r, c, input));
+            printf("%s <- input\n", intMatrixPtr(r, c, input));
             printf("%s <- target\n", intMatrixStr(r, c, target));
         } else
         {
             printf("TEST FAILED!!\n");
-            printf("%s <- input\n", intMatrixStr(r, c, input));
+            printf("%s <- input\n", intMatrixPtr(r, c, input));
             printf("%s <- target\n", intMatrixStr(r, c, target));
         }
     }
