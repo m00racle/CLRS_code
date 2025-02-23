@@ -146,6 +146,15 @@ void test_chap42()
     intMatrixAssertEquals(2, 1, cross_matrix, mul_target, "TEST: matrix cross", true);
     // free cross matrix
     freeMatrix(cross_matrix, 2);
+
+    // TEST: square matrix cross multiplicaton
+    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
+    int** idSquare_cross = squareMatrixCross(3, id3_matrix, squareA_matrix);
+    // testing step
+    intMatrixAssertEquals(3, 3, idSquare_cross, squareA_matrix, "TEST: square to id matrix cross", true);
+    // free is square cross
+    freeMatrix(idSquare_cross, 3);
 }
 
 int main()

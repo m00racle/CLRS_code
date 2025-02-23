@@ -40,3 +40,22 @@ int** basicMatrixCross(int x, int y, int z, int A[x][y], int B[y][z])
 
     return C;
 }
+
+int** squareMatrixCross(int n, int A[n][n], int B[n][n])
+    /* 
+        FUNCTION: squareMatrixCross
+        matrix multiplicaton but for square matrix
+
+        Return: int** 2D array represents square matrix multiplication results
+
+        Parameters: 
+        int n : number of rows or columns for all matrices involved in calculation
+        int A[][]
+        int B[][]
+    */
+{
+    // pass to basicMatrixCross
+    int** squareC = basicMatrixCross(n, n, n, A, B);
+    
+    return squareC;
+}
