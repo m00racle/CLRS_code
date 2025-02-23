@@ -137,6 +137,15 @@ void test_chap42()
     intMatrixAssertEquals(2, 3, init_set, wrong_set, "TEST: expected to FALSE Asertion", true);
     // free the init set
     freeMatrix(init_set, 2);
+
+    // TEST: matrix cross multiplication
+    int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int** cross_matrix = basicMatrixCross(2, 3, 1, value_matrix, mul_matrix);
+    // testing step
+    int mul_target[2][1] = {{6},{15}};
+    intMatrixAssertEquals(2, 1, cross_matrix, mul_target, "TEST: matrix cross", true);
+    // free cross matrix
+    freeMatrix(cross_matrix, 2);
 }
 
 int main()

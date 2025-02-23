@@ -8,12 +8,12 @@
     4.2 Strassen’s algorithm for matrix multiplication
 */
 
-void basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z], int C[x][z])
-{
+int** basicMatrixCross(int x, int y, int z, int A[x][y], int B[y][z])
     /* 
-        Basic Matrix Multiplication -> C = A x B
+        FUNCTION: basicMatrixCross
+        Basic (vector) multiplication of matrix
 
-        Return int** 2D Array
+        Return: int** 2D array matrix result of multiplication
 
         Parameters:
         int x : number of rows in first matrix (A)
@@ -21,8 +21,10 @@ void basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z], int C[x]
         int z : number of column(s) of second matrix (B) 
         int A[][] : first matrix with x rows and y columns
         int B[][] : second matrix with y rows and z columns
-        int C[][] : all zeros matris with x rows and z columns to put the multiplication results
     */
+{
+    // initialize result matrix
+    int** C = initMatrix(x, z);
 
     // begin multiplication steps
     for (int i = 0; i < x; i++)
@@ -36,21 +38,5 @@ void basicMatrixMultiply(int x, int y, int z, int A[x][y], int B[y][z], int C[x]
         }
     }
 
-}
-
-void squareMatrixMultiply(int n, int A[n][n], int B[n][n], int C[n][n])
-{
-    /* 
-        matrix multiplicaton but for square matrix
-
-        Return: void
-
-        Parameters: 
-        int n : number of rows or columns for all matrices involved in calculation
-        int A[][]
-        int B[][]
-    */
-    
-    // pass trhrough
-    basicMatrixMultiply(n, n, n, A, B, C);
+    return C;
 }
