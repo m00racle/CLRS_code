@@ -78,7 +78,6 @@ bool intArrayAssertEquals(int* input, int* target, int length, char* test_id, bo
 bool intMatrixAssertEquals(int r, int c, int** input, int target[r][c], char* test_id, bool verbose)
 {
     /*
-        DEPRECATED:
         Test if Matrix in the form of Array of int Arrays is equal to target Matrix with the same type
         and dimension
 
