@@ -110,10 +110,58 @@ void test_chapter4()
     intArrayAssertEquals(safe_down_brute, all_downExp, 3, "Safe Brute Max Sub Array allnegative data", true);
 }
 
+void test_chap42()
+{
+    /* 
+        testing for matrix and Strassen algoritm related
+    */
+    
+    // start with the old matrix assert equal tests
+    int** init_zeros = initMatrix(2, 3);
+    
+    // comparison 
+    int compare_zero[2][3] = {{0, 0, 0}, {0, 0, 0}};
+    // TEST: init matrix all zeros
+    intMatrixAssertEquals(2, 3, init_zeros, compare_zero, "TEST: init all zero matrix", true);
+    //free the heap matrix
+    freeMatrix(init_zeros, 2);
+
+    // TEST set matrix
+    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int** init_set = setMatrix(2, 3, value_matrix);
+
+    //test: set matrix same as value matrix
+    intMatrixAssertEquals(2, 3, init_set, value_matrix, "TEST: set values matrix", true);
+    // TEST: set matrix but compare to test FALSE assertion
+    int wrong_set[2][3] = {{1,2,5}, {5, 7, 6}};
+    intMatrixAssertEquals(2, 3, init_set, wrong_set, "TEST: expected to FALSE Asertion", true);
+    // free the init set
+    freeMatrix(init_set, 2);
+
+    // TEST: matrix cross multiplication
+    int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int** cross_matrix = basicMatrixCross(2, 3, 1, value_matrix, mul_matrix);
+    // testing step
+    int mul_target[2][1] = {{6},{15}};
+    intMatrixAssertEquals(2, 1, cross_matrix, mul_target, "TEST: matrix cross", true);
+    // free cross matrix
+    freeMatrix(cross_matrix, 2);
+
+    // TEST: square matrix cross multiplicaton
+    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
+    int** idSquare_cross = squareMatrixCross(3, id3_matrix, squareA_matrix);
+    // testing step
+    intMatrixAssertEquals(3, 3, idSquare_cross, squareA_matrix, "TEST: square to id matrix cross", true);
+    // free is square cross
+    freeMatrix(idSquare_cross, 3);
+}
+
 int main()
 {
     test_array();
     test_chapter2();
     test_chapter4();
+    test_chap42();
     return 0;
 }
