@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+#include <stdbool.h>
 #include "../utils/arrutil.h"
 
 int* TransMaxSubArray(int* A, int low, int high)

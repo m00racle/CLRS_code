@@ -155,6 +155,10 @@ void test_chap42()
     intMatrixAssertEquals(3, 3, idSquare_cross, squareA_matrix, "TEST: square to id matrix cross", true);
     // free is square cross
     freeMatrix(idSquare_cross, 3);
+
+    // test power of two
+    boolAssertFalse(isPowerofTwo(5), "TEST: 5 is Power of Two should return FALSE", true);
+    boolAssertTrue(isPowerofTwo(8), "TEST: 8 is Power of Two should return TRUE", true);
 }
 
 int main()

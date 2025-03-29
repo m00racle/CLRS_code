@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <math.h>
 
 
 void intArrCopy(int *src, int *dest, int l)
@@ -239,4 +241,15 @@ int** setMatrix(int r, int c, int B[r][c])
     // return
 
     return filled_matrix;
+}
+
+bool isPowerofTwo(int n)
+    /*  
+        find out whether n is power of two
+        PARAMETERS 
+        int n = integer tested whether it is power of two or not!
+    */
+{
+    int log_val = log2(n);
+    return pow(2, log_val) == n;
 }

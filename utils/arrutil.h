@@ -65,4 +65,11 @@ int** setMatrix(int r, int c, int B[r][c]);
         int B[][] : the stack 2D array matrix which element wanted to transfer to heap
     */
 
+bool isPowerofTwo(int n);
+    /*  
+        find out whether n is power of two
+        PARAMETERS 
+        int n = integer tested whether it is power of two or not!
+    */
+
 #endif
