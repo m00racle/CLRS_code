@@ -253,3 +253,26 @@ bool isPowerofTwo(int n)
     int log_val = log2(n);
     return pow(2, log_val) == n;
 }
+
+int** paddingMatrix(int ori_row, int ori_col, int Mat[ori_row][ori_col], int pad_size)
+    /*  
+        convert original matrix into square matrix of n x n which n is power of two
+
+        RETURN: int** pointer matrix
+
+        PARAMS:
+        int ori_row : original row size of Matrix
+        int ori_col : original column size of Matrix
+        int Mat[][] : the original matrix
+        int pad_size : the size of row of the padded matrix returned
+    */
+{
+    //prepare the empty matrix (pointer based) on pad_size x pad_size 
+    int** padded_matrix = initMatrix(pad_size, pad_size);
+    // fill the original elemet to the padded matrix
+    for (int i = 0; i < ori_row; i++)
+        for (int j = 0; j < ori_col; j++)
+            padded_matrix[i][j] = Mat[i][j];
+    //return the padded matrix
+    return padded_matrix;
+}

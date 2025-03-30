@@ -159,6 +159,13 @@ void test_chap42()
     // test power of two
     boolAssertFalse(isPowerofTwo(5), "TEST: 5 is Power of Two should return FALSE", true);
     boolAssertTrue(isPowerofTwo(8), "TEST: 8 is Power of Two should return TRUE", true);
+
+    // test padding matrix
+    int expPadded_value_matrix[4][4] = {{1,2,3,0},{4,5,6,0}, {0,0,0,0},{0,0,0,0}};
+    int** padded_value_matrix = paddingMatrix(2, 3, value_matrix, 4);
+    intMatrixAssertEquals(4, 4, padded_value_matrix, expPadded_value_matrix, "TEST: padding 2x3 matrix to 4x4", true);
+    // free the padded value matrix
+    freeMatrix(padded_value_matrix, 4);
 }
 
 int main()
