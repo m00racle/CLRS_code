@@ -85,4 +85,20 @@ int** paddingMatrix(int ori_row, int ori_col, int Mat[ori_row][ori_col], int pad
         int pad_size : the size of row of the padded matrix returned
     */
 
+int** reduceMatrix(int spec_row, int spec_col, int** bigger_matrix);
+    /*  
+        reduces big matrix elements onto matrix of specified row and column size
+        
+        WARNING: this function does NOT clear memory of the bigger matrix always 
+        clear the bigger matrix memory allocation once this function is destroyed
+
+        RETURN: int** matrix which reduced version of the bigger matrix
+
+        PARAMETERS:
+        int spec_row = specified rows size of the reduced matrix
+        int spec_col = specified column size of the reduced matrix
+        int** bigger_matrix = the matrix to be reduced
+    */
+
+
 #endif

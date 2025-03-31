@@ -166,6 +166,12 @@ void test_chap42()
     intMatrixAssertEquals(4, 4, padded_value_matrix, expPadded_value_matrix, "TEST: padding 2x3 matrix to 4x4", true);
     // free the padded value matrix
     freeMatrix(padded_value_matrix, 4);
+
+    int** padded_zeros = paddingMatrix(2, 3, compare_zero, 4);
+    int** reduced_zeros = reduceMatrix(2, 3, padded_zeros);
+    intMatrixAssertEquals(2, 3, reduced_zeros, compare_zero, "TEST: reduced padded matrix should return 2 x 3 all zeros", true);
+    freeMatrix(padded_zeros, 4);
+    freeMatrix(reduced_zeros, 2);
 }
 
 int main()
