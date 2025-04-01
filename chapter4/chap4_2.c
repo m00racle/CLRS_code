@@ -91,3 +91,35 @@ int** sumStrassenMatrix(int size_Add, int row0A, int col0A, int** matrix_A, int 
     
     return summedMatrix;
 }
+
+int** subStrasssenMatrix(int size_Sub, int row0A, int col0A, int** matrix_A, int row0B, int col0B, int** matrix_B)
+{
+    /*  
+        Subtract matrices A - B for Strassen's recursive steps
+         A[row0A to row0A + size_Add][col0A to col0A + size Add] - B[row0B to row0B + size_Add][col0B to col0B +_ size_Add]
+
+        Also correspond to different basis sizes 
+        WARNING: this is for strassen's algorithm use only
+        The function assumes that the size to add is ALWAYS a square matrix
+        It is the caller function responsibility to ensure that the size_Add is appropriate
+
+        RETURN: int** matrix with size = size_Add x size_Add
+
+        PARAMTERS:
+        int size_Add = the size of row or col of the subtraction area
+        int row0A = the starting point of row for matrix A to be used in subtraction operation
+        int col0A = the starting point of column for matrix A to be used in subtraction operation
+        int** matrix_A = the matrix A 
+        int row0B = the starting point of row for matrix B to be used in subtraction operation
+        int col0B = the starting point of column for matrix B to be used in subtraction operation
+        int** matrix_B = the matrix B
+    */
+    // init the result matrix
+    int** subtractedMatrix = initMatrix(size_Sub, size_Sub);
+    // start subtraction operation
+    for (int i; i < size_Sub; i++)
+        for (int j; j < size_Sub; j++)
+            subtractedMatrix[i][j] = matrix_A[row0A + i][col0A + j] - matrix_B[row0B + i][col0B + j];
+
+    return subtractedMatrix;
+}
