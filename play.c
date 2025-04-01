@@ -11,8 +11,6 @@ int main()
     */
     
     // simple tests
-    printf("Hello from Play ground...\n");
-    int testTwo = isPowerofTwo(3);
-    printf("test of power of two: %d", testTwo);
+    printf("Hello from Playground...\n");
     return 0;
 }
