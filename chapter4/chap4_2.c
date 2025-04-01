@@ -123,3 +123,28 @@ int** subStrasssenMatrix(int size_Sub, int row0A, int col0A, int** matrix_A, int
 
     return subtractedMatrix;
 }
+
+void putStarssenMatrix(int size_put, int row0from, int col0from, int** source, int row0to, int col0to, int** target)
+{
+    /*
+        Put elements of source onto target 
+        But can choose which elements from source to be transferred 
+        And can choose where in the target those element would be put
+
+        RETURN: void
+
+        PARAMETERS: 
+        int size_put = the size of the element (row or col NOT row x col) of the operation
+        int row0from = the starting row index of the source matrix element to sent to target
+        int col0from = the starting column index of the source matrix elemeent to sent to target
+        int** source = matrix used as source of elements to be put
+        int row0to = starting row index in target matrix which element to be substitute with element from source
+        int col0to = starting column index in target matrix which element to be substitute with element from source
+        int** target = target matrix in which its elements to be substituted by elements from source matrix
+    */
+    // start the iteration using row and column start plus the size
+    for (int i = 0; i < size_put; i++)
+        for (int j = 0; j < size_put; j++)
+            target[row0to + i][col0to + j] = source[row0from + i][col0from + j];
+
+}
