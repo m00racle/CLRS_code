@@ -259,3 +259,58 @@ int** recursiveStrassen(int matrix_size, int** A, int** B)
     }
     return C;
 }
+
+int** basicStrassenCross(int x, int y, int z, int A[x][y], int B[y][z])
+    /*  
+        FUNCTION: basicStrassenCross
+        matrix multiplication using Strassen's algorithm
+
+        Return: int** 2D array matrix result of multiplicaton
+        CAUTION: return pointer onto heap memory. Always clear afterwards to avoid memory leak!
+
+        Parameters: 
+        int x : number of rows in first matrix (A)
+        int y : number of column(s) of first matrix (A), rows in second matrix (B)
+        int z : number of column(s) of second matrix (B) 
+        int A[][] : first matrix with x rows and y columns
+        int B[][] : second matrix with y rows and z columns 
+    */
+{
+    // finding largest size as basic for padding factor
+    int max_size;
+    if (x > y)
+    {
+        max_size = x;
+    } else 
+    {
+        max_size = y;
+    }
+    // test final against z
+    if (z > y) max_size = z;
+    // finding padding factor
+    int pad_size;
+    if (isPowerofTwo(max_size))
+    {
+        pad_size = max_size;
+    } else
+    {
+        int log_2Val = log2(max_size);
+        // increment log_2Val to increase to the nearest power of two above max size
+        log_2Val++;
+        pad_size = pow(2,log_2Val);
+    }
+    // put each input matrix to padding process to convert them to heap pointers
+    int** padA = paddingMatrix(x, y, A, pad_size);
+    int** padB = paddingMatrix(y, z, B, pad_size);
+    // multiply padded A and B
+    int** padC = recursiveStrassen(pad_size, padA, padB);
+    // free the padded A and B
+    freeMatrix(padA, pad_size);
+    freeMatrix(padB, pad_size);
+    //extract C from the padded C matrix
+    int** C = reduceMatrix(x, z, padC);
+    // free padded C 
+    freeMatrix(padC, pad_size);
+    
+    return C;
+}

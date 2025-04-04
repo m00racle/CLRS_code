@@ -118,6 +118,10 @@ void test_chap42()
     
     // start with the old matrix assert equal tests
     int** init_zeros = initMatrix(2, 3);
+    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
     
     // comparison 
     int compare_zero[2][3] = {{0, 0, 0}, {0, 0, 0}};
@@ -127,7 +131,6 @@ void test_chap42()
     freeMatrix(init_zeros, 2);
 
     // TEST set matrix
-    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
     int** init_set = setMatrix(2, 3, value_matrix);
 
     //test: set matrix same as value matrix
@@ -139,7 +142,6 @@ void test_chap42()
     freeMatrix(init_set, 2);
 
     // TEST: matrix cross multiplication
-    int mul_matrix[3][1] = {{1}, {1}, {1}};
     int** cross_matrix = basicMatrixCross(2, 3, 1, value_matrix, mul_matrix);
     // testing step
     int mul_target[2][1] = {{6},{15}};
@@ -148,8 +150,6 @@ void test_chap42()
     freeMatrix(cross_matrix, 2);
 
     // TEST: square matrix cross multiplicaton
-    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
-    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
     int** idSquare_cross = squareMatrixCross(3, id3_matrix, squareA_matrix);
     // testing step
     intMatrixAssertEquals(3, 3, idSquare_cross, squareA_matrix, "TEST: square to id matrix cross", true);
