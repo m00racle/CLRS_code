@@ -181,6 +181,13 @@ void test_chap42()
     intMatrixAssertEquals(2, 1, strassen_basic_mul, mul_target, "TEST: Strassen's basic non square matrix cross", true);
     // free cross matrix
     freeMatrix(strassen_basic_mul, 2);
+
+    // TEST: Strassen's square matrix cross multiplicaton
+    int** strassenSquare = squareStrassenCross(3, id3_matrix, squareA_matrix);
+    // testing step
+    intMatrixAssertEquals(3, 3, strassenSquare, squareA_matrix, "TEST: Strassen's square multiplication", true);
+    // free is square cross
+    freeMatrix(strassenSquare, 3);
 }
 
 int main()

@@ -261,6 +261,7 @@ int** recursiveStrassen(int matrix_size, int** A, int** B)
 }
 
 int** basicStrassenCross(int x, int y, int z, int A[x][y], int B[y][z])
+{
     /*  
         FUNCTION: basicStrassenCross
         matrix multiplication using Strassen's algorithm
@@ -275,7 +276,6 @@ int** basicStrassenCross(int x, int y, int z, int A[x][y], int B[y][z])
         int A[][] : first matrix with x rows and y columns
         int B[][] : second matrix with y rows and z columns 
     */
-{
     // finding largest size as basic for padding factor
     int max_size;
     if (x > y)
@@ -313,4 +313,22 @@ int** basicStrassenCross(int x, int y, int z, int A[x][y], int B[y][z])
     freeMatrix(padC, pad_size);
     
     return C;
+}
+
+int** squareStrassenCross(int n, int A[n][n], int B[n][n])
+{
+    /*  
+        FUNCTION: squareStrassenCross
+        matrix multiplication using Strassen's algorithm for square matrix both inputs
+
+        Return: int** 2D array matrix result of multiplicaton
+        CAUTION: return pointer onto heap memory. Always clear afterwards to avoid memory leak!
+
+        Parameters: 
+        int n : number of rows or columns for all matrices involved in calculation
+        int A[][]
+        int B[][]
+    */
+    // pass the input onto basic StrassenCross
+    return basicStrassenCross(n, n, n, A, B);
 }
