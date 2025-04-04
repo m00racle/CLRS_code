@@ -69,6 +69,4 @@ int** squareStrassenCross(int n, int A[n][n], int B[n][n]);
 
 
 // FOR PLAYGROUND ONLY!!
-int** sumStrassenMatrix(int size_Add, int** matrix_A, int** matrix_B);
-int** subStrasssenMatrix(int size_Sub, int** matrix_A, int** matrix_B);
 #endif

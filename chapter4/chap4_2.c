@@ -139,3 +139,27 @@ void putStarssenMatrix(int size_put, int row0from, int col0from, int** source, i
             target[row0to + i][col0to + j] = source[row0from + i][col0from + j];
 
 }
+
+int** splitStrassenMatrix(int ext_size, int row0, int col0, int** ori_matrix)
+{
+    /* 
+        Split and extract the part of the matrix into smaller matrix
+        ASSUMES : the ori_matrix is n x n square matrix which n is power of two
+        
+        RETURN: int** smaller n/2 x n/2 matrix
+
+        PARAMETERS =
+        int ext_size = size of the extraction row wise or column wise 
+        int row0 = the starting row index for split and extract operation will begin
+        int col0 = the starting column index for split and extract operation will begin
+        int** ori_matrix = 2D array pointer represent original matrix to be splitted and extracted
+    */
+    // initial returned matrix for extracted elements from splitted matrix
+    int** ext_matrix = initMatrix(ext_size, ext_size);
+    // begin extracting elements from original matrix based on index position
+    for (int i = 0 ; i < ext_size; i++)
+        for (int j = 0; j < ext_size; j++)
+            ext_matrix[i][j] = ori_matrix[row0 + i][col0 + j];
+
+    return ext_matrix;
+}
