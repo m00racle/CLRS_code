@@ -88,7 +88,7 @@ int** sumStrassenMatrix(int size_Add, int** matrix_A, int** matrix_B)
     return summedMatrix;
 }
 
-int** subStrasssenMatrix(int size_Sub, int** matrix_A, int** matrix_B)
+int** subStrassenMatrix(int size_Sub, int** matrix_A, int** matrix_B)
 {
     /*  
         Subtract matrices A - B for Strassen's recursive steps
@@ -115,7 +115,7 @@ int** subStrasssenMatrix(int size_Sub, int** matrix_A, int** matrix_B)
     return subtractedMatrix;
 }
 
-void putStarssenMatrix(int size_put, int row0from, int col0from, int** source, int row0to, int col0to, int** target)
+void putStrassenMatrix(int size_put, int** source, int row0to, int col0to, int** target)
 {
     /*
         Put elements of source onto target 
@@ -126,8 +126,6 @@ void putStarssenMatrix(int size_put, int row0from, int col0from, int** source, i
 
         PARAMETERS: 
         int size_put = the size of the element (row or col NOT row x col) of the operation
-        int row0from = the starting row index of the source matrix element to sent to target
-        int col0from = the starting column index of the source matrix elemeent to sent to target
         int** source = matrix used as source of elements to be put
         int row0to = starting row index in target matrix which element to be substitute with element from source
         int col0to = starting column index in target matrix which element to be substitute with element from source
@@ -136,7 +134,7 @@ void putStarssenMatrix(int size_put, int row0from, int col0from, int** source, i
     // start the iteration using row and column start plus the size
     for (int i = 0; i < size_put; i++)
         for (int j = 0; j < size_put; j++)
-            target[row0to + i][col0to + j] = source[row0from + i][col0from + j];
+            target[row0to + i][col0to + j] = source[i][j];
 
 }
 
@@ -162,4 +160,102 @@ int** splitStrassenMatrix(int ext_size, int row0, int col0, int** ori_matrix)
             ext_matrix[i][j] = ori_matrix[row0 + i][col0 + j];
 
     return ext_matrix;
+}
+
+int** recursiveStrassen(int matrix_size, int** A, int** B)
+    /* 
+        recursive steps of Strassen's algorithm
+    */
+{
+    // initialize multiplication result matrix
+    int** C = initMatrix(matrix_size, matrix_size);
+    // base case 
+    if (matrix_size == 1)
+    {
+        C[0][0] = A[0][0] * B[0][0];   
+    } else
+    {
+        // divide the size
+        int n = matrix_size/2;
+        // extract each matrix into size/2 x size /2 
+        int** A11 = splitStrassenMatrix(n, 0, 0, A);
+        int** A12 = splitStrassenMatrix(n, 0, n, A);
+        int** A21 = splitStrassenMatrix(n, n, 0, A);
+        int** A22 = splitStrassenMatrix(n, n, n, A);
+        int** B11 = splitStrassenMatrix(n, 0, 0, B);
+        int** B12 = splitStrassenMatrix(n, 0, n, B);
+        int** B21 = splitStrassenMatrix(n, n, 0, B);
+        int** B22 = splitStrassenMatrix(n, n, n, B);
+        // start making matrices S1 up to S10
+        int** S1 = subStrassenMatrix(n, B12, B22);
+        int** S2 = sumStrassenMatrix(n, A11, A12);
+        int** S3 = sumStrassenMatrix(n, A21, A22);
+        int** S4 = subStrassenMatrix(n, B21, B11);
+        int** S5 = sumStrassenMatrix(n, A11, A22);
+        int** S6 = sumStrassenMatrix(n, B11, B22);
+        int** S7 = subStrassenMatrix(n, A12, A22);
+        int** S8 = sumStrassenMatrix(n, B21, B22);
+        int** S9 = subStrassenMatrix(n, A11, A21);
+        int** S10 = sumStrassenMatrix(n, B11, B12);
+        // free unused splits matrices
+        freeMatrix(A12, n);
+        freeMatrix(A21, n);
+        freeMatrix(B12, n);
+        freeMatrix(B21, n);
+        // recursive steps
+        int** P1 = recursiveStrassen(n, A11, S1);
+        int** P2 = recursiveStrassen(n, S2, B22);
+        int** P3 = recursiveStrassen(n, S3, B11);
+        int** P4 = recursiveStrassen(n, A22, S4);
+        int** P5 = recursiveStrassen(n, S5, S6);
+        int** P6 = recursiveStrassen(n, S7, S8);
+        int** P7 = recursiveStrassen(n, S9, S10);
+        // clean the rest of As and Ss
+        freeMatrix(A11, n);
+        freeMatrix(A22, n);
+        freeMatrix(B11, n);
+        freeMatrix(B22, n);
+        freeMatrix(S1, n);
+        freeMatrix(S2, n);
+        freeMatrix(S3, n);
+        freeMatrix(S4, n);
+        freeMatrix(S5, n);
+        freeMatrix(S6, n);
+        freeMatrix(S7, n);
+        freeMatrix(S8, n);
+        freeMatrix(S9, n);
+        freeMatrix(S10, n);
+        // arrange the part of matrix C from Ps
+        int** C11L = sumStrassenMatrix(n, P5, P4);
+        int** C11R = subStrassenMatrix(n, P2, P6);
+        int** C11 = subStrassenMatrix(n, C11L, C11R);
+        int** C12 = sumStrassenMatrix(n, P1, P2);
+        int** C21 = sumStrassenMatrix(n, P3, P4);
+        int** C22L = sumStrassenMatrix(n, P5, P1);
+        int** C22R = sumStrassenMatrix(n, P3, P7);
+        int** C22 = subStrassenMatrix(n, C22L, C22R);
+        // free unused matrices
+        freeMatrix(P1, n);
+        freeMatrix(P2, n);
+        freeMatrix(P3, n);
+        freeMatrix(P4, n);
+        freeMatrix(P5, n);
+        freeMatrix(P6, n);
+        freeMatrix(P7, n);
+        freeMatrix(C11L, n);
+        freeMatrix(C11R, n);
+        freeMatrix(C22L, n);
+        freeMatrix(C22R, n);
+        // put the part of the matrix back to matrix C
+        putStrassenMatrix(n, C11, 0, 0, C);
+        putStrassenMatrix(n, C12, 0, n, C);
+        putStrassenMatrix(n, C21, n, 0, C);
+        putStrassenMatrix(n, C22, n, n, C);
+        //free 4 last matrices called by this funcition
+        freeMatrix(C11, n);
+        freeMatrix(C12, n);
+        freeMatrix(C21, n);
+        freeMatrix(C22, n);
+    }
+    return C;
 }
