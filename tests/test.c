@@ -172,6 +172,15 @@ void test_chap42()
     intMatrixAssertEquals(2, 3, reduced_zeros, compare_zero, "TEST: reduced padded matrix should return 2 x 3 all zeros", true);
     freeMatrix(padded_zeros, 4);
     freeMatrix(reduced_zeros, 2);
+
+    // TEST: matrix Strassen's multiplication
+    // int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int** strassen_basic_mul = basicStrassenCross(2, 3, 1, value_matrix, mul_matrix);
+    // testing step
+    // int mul_target[2][1] = {{6},{15}};
+    intMatrixAssertEquals(2, 1, strassen_basic_mul, mul_target, "TEST: Strassen's basic non square matrix cross", true);
+    // free cross matrix
+    freeMatrix(strassen_basic_mul, 2);
 }
 
 int main()
