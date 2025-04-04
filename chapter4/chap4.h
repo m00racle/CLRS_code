@@ -67,4 +67,6 @@ int** squareStrassenCross(int n, int A[n][n], int B[n][n]);
         int B[][]
     */
 
+
+// FOR PLAYGROUND ONLY!!
 #endif

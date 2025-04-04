@@ -118,6 +118,10 @@ void test_chap42()
     
     // start with the old matrix assert equal tests
     int** init_zeros = initMatrix(2, 3);
+    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
     
     // comparison 
     int compare_zero[2][3] = {{0, 0, 0}, {0, 0, 0}};
@@ -127,7 +131,6 @@ void test_chap42()
     freeMatrix(init_zeros, 2);
 
     // TEST set matrix
-    int value_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
     int** init_set = setMatrix(2, 3, value_matrix);
 
     //test: set matrix same as value matrix
@@ -139,7 +142,6 @@ void test_chap42()
     freeMatrix(init_set, 2);
 
     // TEST: matrix cross multiplication
-    int mul_matrix[3][1] = {{1}, {1}, {1}};
     int** cross_matrix = basicMatrixCross(2, 3, 1, value_matrix, mul_matrix);
     // testing step
     int mul_target[2][1] = {{6},{15}};
@@ -148,13 +150,44 @@ void test_chap42()
     freeMatrix(cross_matrix, 2);
 
     // TEST: square matrix cross multiplicaton
-    int id3_matrix[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
-    int squareA_matrix[3][3] = {{1,2,3}, {4,5,6}, {7, 8, 9}};
     int** idSquare_cross = squareMatrixCross(3, id3_matrix, squareA_matrix);
     // testing step
     intMatrixAssertEquals(3, 3, idSquare_cross, squareA_matrix, "TEST: square to id matrix cross", true);
     // free is square cross
     freeMatrix(idSquare_cross, 3);
+
+    // test power of two
+    boolAssertFalse(isPowerofTwo(5), "TEST: 5 is Power of Two should return FALSE", true);
+    boolAssertTrue(isPowerofTwo(8), "TEST: 8 is Power of Two should return TRUE", true);
+
+    // test padding matrix
+    int expPadded_value_matrix[4][4] = {{1,2,3,0},{4,5,6,0}, {0,0,0,0},{0,0,0,0}};
+    int** padded_value_matrix = paddingMatrix(2, 3, value_matrix, 4);
+    intMatrixAssertEquals(4, 4, padded_value_matrix, expPadded_value_matrix, "TEST: padding 2x3 matrix to 4x4", true);
+    // free the padded value matrix
+    freeMatrix(padded_value_matrix, 4);
+
+    int** padded_zeros = paddingMatrix(2, 3, compare_zero, 4);
+    int** reduced_zeros = reduceMatrix(2, 3, padded_zeros);
+    intMatrixAssertEquals(2, 3, reduced_zeros, compare_zero, "TEST: reduced padded matrix should return 2 x 3 all zeros", true);
+    freeMatrix(padded_zeros, 4);
+    freeMatrix(reduced_zeros, 2);
+
+    // TEST: matrix Strassen's multiplication
+    // int mul_matrix[3][1] = {{1}, {1}, {1}};
+    int** strassen_basic_mul = basicStrassenCross(2, 3, 1, value_matrix, mul_matrix);
+    // testing step
+    // int mul_target[2][1] = {{6},{15}};
+    intMatrixAssertEquals(2, 1, strassen_basic_mul, mul_target, "TEST: Strassen's basic non square matrix cross", true);
+    // free cross matrix
+    freeMatrix(strassen_basic_mul, 2);
+
+    // TEST: Strassen's square matrix cross multiplicaton
+    int** strassenSquare = squareStrassenCross(3, id3_matrix, squareA_matrix);
+    // testing step
+    intMatrixAssertEquals(3, 3, strassenSquare, squareA_matrix, "TEST: Strassen's square multiplication", true);
+    // free is square cross
+    freeMatrix(strassenSquare, 3);
 }
 
 int main()

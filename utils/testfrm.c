@@ -9,13 +9,21 @@
 
 bool boolAssertTrue(int value, char* test_id, bool verbose)
 {
-    if (verbose) printf("\nTEST ID: %s\n", test_id);
+    if (verbose)
+    {
+        if (verbose) printf("\nTEST ID: %s\n", test_id);
+        if (value == true) printf("TEST PASSED\n"); else printf("TEST FAILED!!\n");
+    }
     return value == true;
 }
 
 bool boolAssertFalse(int value, char* test_id, bool verbose)
 {
-    if (verbose) printf("\nTEST ID: %s\n", test_id);
+    if (verbose)
+    {
+        if (verbose) printf("\nTEST ID: %s\n", test_id);
+        if (value == false) printf("TEST PASSED\n"); else printf("TEST FAILED!!\n");
+    }
     return value == false;
 }
 

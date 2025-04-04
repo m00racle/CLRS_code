@@ -65,4 +65,40 @@ int** setMatrix(int r, int c, int B[r][c]);
         int B[][] : the stack 2D array matrix which element wanted to transfer to heap
     */
 
+bool isPowerofTwo(int n);
+    /*  
+        find out whether n is power of two
+        PARAMETERS 
+        int n = integer tested whether it is power of two or not!
+    */
+
+int** paddingMatrix(int ori_row, int ori_col, int Mat[ori_row][ori_col], int pad_size);
+    /*  
+        convert original matrix into square matrix of n x n which n is power of two
+
+        RETURN: int** pointer matrix
+
+        PARAMS:
+        int ori_row : original row size of Matrix
+        int ori_col : original column size of Matrix
+        int Mat[][] : the original matrix
+        int pad_size : the size of row of the padded matrix returned
+    */
+
+int** reduceMatrix(int spec_row, int spec_col, int** bigger_matrix);
+    /*  
+        reduces big matrix elements onto matrix of specified row and column size
+        
+        WARNING: this function does NOT clear memory of the bigger matrix always 
+        clear the bigger matrix memory allocation once this function is destroyed
+
+        RETURN: int** matrix which reduced version of the bigger matrix
+
+        PARAMETERS:
+        int spec_row = specified rows size of the reduced matrix
+        int spec_col = specified column size of the reduced matrix
+        int** bigger_matrix = the matrix to be reduced
+    */
+
+
 #endif

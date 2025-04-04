@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <math.h>
 
 
 void intArrCopy(int *src, int *dest, int l)
@@ -239,4 +241,63 @@ int** setMatrix(int r, int c, int B[r][c])
     // return
 
     return filled_matrix;
+}
+
+bool isPowerofTwo(int n)
+    /*  
+        find out whether n is power of two
+        PARAMETERS 
+        int n = integer tested whether it is power of two or not!
+    */
+{
+    int log_val = log2(n);
+    return pow(2, log_val) == n;
+}
+
+int** paddingMatrix(int ori_row, int ori_col, int Mat[ori_row][ori_col], int pad_size)
+    /*  
+        convert original matrix into square matrix of n x n which n is power of two
+
+        RETURN: int** pointer matrix
+
+        PARAMS:
+        int ori_row : original row size of Matrix
+        int ori_col : original column size of Matrix
+        int Mat[][] : the original matrix
+        int pad_size : the size of row of the padded matrix returned
+    */
+{
+    //prepare the empty matrix (pointer based) on pad_size x pad_size 
+    int** padded_matrix = initMatrix(pad_size, pad_size);
+    // fill the original elemet to the padded matrix
+    for (int i = 0; i < ori_row; i++)
+        for (int j = 0; j < ori_col; j++)
+            padded_matrix[i][j] = Mat[i][j];
+    //return the padded matrix
+    return padded_matrix;
+}
+
+int** reduceMatrix(int spec_row, int spec_col, int** bigger_matrix)
+{
+    /*  
+        reduces big matrix elements onto matrix of specified row and column size
+        
+        WARNING: this function does NOT clear memory of the bigger matrix always 
+        clear the bigger matrix memory allocation once this function is destroyed
+
+        RETURN: int** matrix which reduced version of the bigger matrix
+
+        PARAMETERS:
+        int spec_row = specified rows size of the reduced matrix
+        int spec_col = specified column size of the reduced matrix
+        int** bigger_matrix = the matrix to be reduced
+    */
+    // initialize new (reduced) matrix
+    int** reduced_matrix = initMatrix(spec_row, spec_col);
+    // fill in the reduced_matrix with parts from the bigger matrix
+    for (int i = 0; i < spec_row; i++)
+        for (int j = 0; j < spec_col; j++)
+            reduced_matrix[i][j] = bigger_matrix[i][j];
+    
+    return reduced_matrix;
 }
